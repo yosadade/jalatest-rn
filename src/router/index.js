@@ -1,14 +1,21 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
+import {Home, Detail} from '../pages';
+
+const Stack = createStackNavigator();
 
 const Router = () => {
   return (
-    <View>
-      <Text />
-    </View>
+    <Stack.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+        ...TransitionPresets.SlideFromRightIOS,
+      }}>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Detail" component={Detail} />
+    </Stack.Navigator>
   );
 };
 
 export default Router;
-
-const styles = StyleSheet.create({});
