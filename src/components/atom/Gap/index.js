@@ -17,7 +17,7 @@ const styles = EStyleSheet.create({
   container: {
     backgroundColor: colors.background.secondary,
     paddingHorizontal: '20rem',
-    paddingVertical: '15rem',
+    paddingVertical: '10rem',
   },
   title: {
     fontSize: '12rem',

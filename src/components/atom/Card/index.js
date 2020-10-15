@@ -55,12 +55,13 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
   },
   title: {
-    fontSize: '16rem',
+    fontSize: '18rem',
     color: colors.title.primary,
     fontWeight: 'bold',
   },
   titleLocation: {
     fontSize: '12rem',
+    marginTop: '3rem',
     color: colors.title.tertiary,
     fontWeight: 'bold',
   },

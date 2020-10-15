@@ -1,8 +1,10 @@
 import React from 'react';
-import {View, ScrollView} from 'react-native';
+import {View, ScrollView, TouchableOpacity, Text} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {Header, Gap, Card} from '../../components';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {Header, Gap, Card, Button} from '../../components';
 import {colors} from '../../utils';
+import {Footer} from '../../components/molecul';
 
 const Home = ({navigation}) => {
   const data = [
@@ -14,7 +16,7 @@ const Home = ({navigation}) => {
     },
     {
       id: 2,
-      price: 'Rp 67,000',
+      price: 'Rp 65,000',
       location: 'Jawa Barat',
       time: '21 Oktober, 2018 oleh Syauq Aziz',
     },
@@ -26,7 +28,7 @@ const Home = ({navigation}) => {
     },
     {
       id: 4,
-      price: 'Rp 67,000',
+      price: 'Rp 68,000',
       location: 'Jawa Tengah',
       time: '21 Oktober, 2018 oleh Syauq Aziz',
     },
@@ -61,6 +63,20 @@ const Home = ({navigation}) => {
           );
         })}
       </ScrollView>
+      <View style={styles.footer}>
+        <Button
+          title="Filter Lokasi"
+          subTitle="2 filter diterapkan"
+          icon="filter-list"
+          backgroundColor={colors.background.tertiary}
+        />
+        <Button
+          title="Urutkan"
+          subTitle="Terdekat"
+          icon="arrow-drop-down-circle"
+          backgroundColor={colors.background.quaternary}
+        />
+      </View>
     </View>
   );
 };
@@ -70,6 +86,9 @@ export default Home;
 const styles = EStyleSheet.create({
   page: {
     backgroundColor: colors.background.secondary,
-    paddingBottom: '60rem',
+    paddingBottom: '110rem',
+  },
+  footer: {
+    flexDirection: 'row',
   },
 });

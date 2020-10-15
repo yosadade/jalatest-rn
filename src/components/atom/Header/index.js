@@ -60,7 +60,7 @@ export default Header;
 const styles = EStyleSheet.create({
   container: {
     paddingHorizontal: '20rem',
-    paddingVertical: '10rem',
+    paddingVertical: '8rem',
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
@@ -84,7 +84,7 @@ const styles = EStyleSheet.create({
     fontWeight: 'bold',
   },
   subTitle: {
-    fontSize: '12rem',
+    fontSize: '11rem',
     color: colors.title.secondary,
     fontWeight: 'bold',
   },
