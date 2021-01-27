@@ -20,8 +20,8 @@ const styles = EStyleSheet.create({
     paddingVertical: '10rem',
   },
   title: {
+    fontFamily: 'Poppins-SemiBold',
     fontSize: '12rem',
-    fontWeight: 'bold',
     color: colors.title.secondary,
   },
 });

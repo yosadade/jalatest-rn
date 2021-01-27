@@ -4,10 +4,44 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {colors} from '../../../utils';
 
-const Button = ({onPress, icon, backgroundColor, title, subTitle}) => {
+const Button = ({
+  type,
+  onPress,
+  icon,
+  backgroundColor,
+  title,
+  subTitle,
+  borderWidth,
+  borderRadius,
+}) => {
+  if (type === 'detail') {
+    return (
+      <TouchableOpacity
+        style={[
+          styles.container,
+          {
+            backgroundColor: backgroundColor,
+            borderWidth: borderWidth,
+            borderRadius: borderRadius,
+          },
+        ]}
+        onPress={onPress}>
+        <View style={styles.wrapperTitle}>
+          <Text style={styles.title}>{title}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  }
   return (
     <TouchableOpacity
-      style={[styles.container, {backgroundColor: backgroundColor}]}
+      style={[
+        styles.container,
+        {
+          backgroundColor: backgroundColor,
+          borderWidth: borderWidth,
+          borderRadius: borderRadius,
+        },
+      ]}
       onPress={onPress}>
       <MaterialIcons
         name={icon}
@@ -26,17 +60,21 @@ const Button = ({onPress, icon, backgroundColor, title, subTitle}) => {
 export default Button;
 
 const styles = EStyleSheet.create({
-  container: {
+  container: (borderWidth, borderRadius) => ({
     flex: 1,
     paddingVertical: '10rem',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-  },
+    borderColor: '#FFFFFF',
+    borderWidth: borderWidth,
+    borderRadius: borderRadius,
+  }),
   icon: {
     marginRight: '10rem',
   },
   title: {
+    fontFamily: 'Poppins-Regular',
     fontSize: '18rem',
     color: colors.title.quaternary,
     fontWeight: 'bold',

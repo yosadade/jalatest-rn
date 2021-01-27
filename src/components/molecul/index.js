@@ -1,3 +1,4 @@
 import Footer from './Footer';
+import Modals from './Modals';
 
-export {Footer};
+export {Footer, Modals};

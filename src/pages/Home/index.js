@@ -1,12 +1,20 @@
-import React from 'react';
-import {View, ScrollView, TouchableOpacity, Text} from 'react-native';
+import React, {useState} from 'react';
+import {View, ScrollView, Text} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {Header, Gap, Card, Button} from '../../components';
+
+import {Header, Gap, Card, Button, Select} from '../../components';
 import {colors} from '../../utils';
-import {Footer} from '../../components/molecul';
+import {Modals} from '../../components/molecul';
 
 const Home = ({navigation}) => {
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [modalSearch, setModalSearch] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+    console.log(isModalVisible);
+  };
+
   const data = [
     {
       id: 1,
@@ -40,44 +48,60 @@ const Home = ({navigation}) => {
     },
   ];
   return (
-    <View style={styles.page}>
-      <Header title="Harga Udang" subTitle="Ukuran 100" />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Gap title="Harga Udang di kota anda" />
-        <Card
-          price="Rp 66,000"
-          location="Kab Purworejo, Jawa Tengah"
-          time="21 Oktober, 2018 oleh Syauq Aziz"
-        />
-        <Gap title="Harga Udang di kota terdekat" />
+    <>
+      <View style={styles.page}>
+        <Header title="Harga Udang" subTitle="Ukuran 100" />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Gap title="Harga Udang di kota anda" />
+          <Card
+            price="Rp 66,000"
+            location="Kab Purworejo, Jawa Tengah"
+            time="21 Oktober, 2018 oleh Syauq Aziz"
+          />
+          <Gap title="Harga Udang di kota terdekat" />
 
-        {data.map((item, index) => {
-          return (
-            <Card
-              key={index}
-              price={item.price}
-              location={item.location}
-              time={item.time}
-              onPress={() => navigation.navigate('Detail')}
-            />
-          );
-        })}
-      </ScrollView>
-      <View style={styles.footer}>
-        <Button
-          title="Filter Lokasi"
-          subTitle="2 filter diterapkan"
-          icon="filter-list"
-          backgroundColor={colors.background.tertiary}
-        />
-        <Button
-          title="Urutkan"
-          subTitle="Terdekat"
-          icon="arrow-drop-down-circle"
-          backgroundColor={colors.background.quaternary}
-        />
+          {data.map((item, index) => {
+            return (
+              <Card
+                key={index}
+                price={item.price}
+                location={item.location}
+                time={item.time}
+                onPress={() => navigation.navigate('Detail')}
+              />
+            );
+          })}
+        </ScrollView>
+        <View style={styles.footer}>
+          <Button
+            title="Filter Lokasi"
+            subTitle="2 filter diterapkan"
+            icon="filter-list"
+            backgroundColor={colors.background.tertiary}
+            onPress={toggleModal}
+          />
+          <Button
+            title="Urutkan"
+            subTitle="Terdekat"
+            icon="arrow-drop-down-circle"
+            backgroundColor={colors.background.quaternary}
+            onPress={toggleModal}
+          />
+        </View>
       </View>
-    </View>
+      <Modals
+        isVisible={isModalVisible}
+        onSwipeCancel={toggleModal}
+        animationOutTiming={500}
+        onPress={toggleModal}
+      />
+      {modalSearch && (
+        <Select
+          label="City"
+          // onSelectChange={(value) => setForm('city', value)}
+        />
+      )}
+    </>
   );
 };
 
@@ -85,10 +109,15 @@ export default Home;
 
 const styles = EStyleSheet.create({
   page: {
+    flex: 1,
     backgroundColor: colors.background.secondary,
-    paddingBottom: '110rem',
   },
   footer: {
     flexDirection: 'row',
+  },
+  modalSearch: {
+    backgroundColor: colors.background.primary,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
   },
 });

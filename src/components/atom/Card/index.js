@@ -1,17 +1,33 @@
 import React from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {colors} from '../../../utils';
 
-const Card = ({price, location, time, onPress}) => {
+const Card = ({type, price, location, time, onPress}) => {
+  if (type === 'spesies') {
+    return (
+      <TouchableOpacity style={styles.container(type)} onPress={onPress}>
+        <Text style={styles.title(type)}>Spesies : {price}</Text>
+        <Text style={styles.titleLocation(type)}>{location}</Text>
+      </TouchableOpacity>
+    );
+  }
+  if (type === 'price') {
+    return (
+      <TouchableOpacity style={styles.container(type)} onPress={onPress}>
+        <Text style={styles.title(type)}>Harga Ukuran {price}</Text>
+        <Text style={styles.titleLocation(type)}>{location}</Text>
+      </TouchableOpacity>
+    );
+  }
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity style={styles.container(type)} onPress={onPress}>
       <View style={styles.content}>
         <View>
-          <Text style={styles.title}>{price}</Text>
-          <Text style={styles.titleLocation}>{location}</Text>
+          <Text style={styles.title(type)}>{price}</Text>
+          <Text style={styles.titleLocation(type)}>{location}</Text>
         </View>
         <TouchableOpacity>
           <Ionicons
@@ -38,13 +54,16 @@ const Card = ({price, location, time, onPress}) => {
 
 export default Card;
 
-const styles = EStyleSheet.create({
-  container: {
+const styles = StyleSheet.create({
+  container: (type) => ({
     backgroundColor: colors.background.primary,
-    paddingHorizontal: '20rem',
-    paddingVertical: '10rem',
-    marginBottom: '1rem',
-  },
+    paddingHorizontal: 20,
+    paddingVertical: type === 'spesies' ? 15 : 10,
+    marginBottom: 1,
+    justifyContent: type !== 'price' ? null : 'space-between',
+    flexDirection: type !== 'price' ? null : 'row',
+    alignItems: type !== 'price' ? null : 'center',
+  }),
   content: {
     justifyContent: 'space-between',
     flexDirection: 'row',
@@ -54,31 +73,32 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
-  title: {
-    fontSize: '18rem',
+  title: (type) => ({
+    fontFamily:
+      type === 'spesies' || 'price' ? 'Poppins-Regular' : 'Poppins-Bold',
+    fontSize: type === 'spesies' ? 12 : 'price' ? 14 : 18,
     color: colors.title.primary,
-    fontWeight: 'bold',
-  },
-  titleLocation: {
-    fontSize: '12rem',
-    marginTop: '3rem',
-    color: colors.title.tertiary,
-    fontWeight: 'bold',
-  },
+  }),
+  titleLocation: (type) => ({
+    fontFamily: 'Poppins-Bold',
+    fontSize: type === 'spesies' || 'price' ? 18 : 12,
+    marginTop: 3,
+    color: type === 'price' ? colors.title.primary : colors.title.tertiary,
+  }),
   titleTime: {
-    fontSize: '10rem',
+    fontFamily: 'Poppins-Regular',
+    fontSize: 10,
     color: colors.title.secondary,
-    fontWeight: '800',
-    marginTop: '20rem',
+    marginTop: 20,
   },
   icon: {
     flexDirection: 'row',
-    marginTop: '10rem',
+    marginTop: 10,
     alignItems: 'center',
   },
   titleNext: {
-    fontSize: '13rem',
+    fontFamily: 'Poppins-Regular',
+    fontSize: 10,
     color: colors.title.secondary,
-    fontWeight: '800',
   },
 });

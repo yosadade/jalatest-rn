@@ -79,13 +79,13 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   title: {
+    fontFamily: 'Poppins-SemiBold',
     fontSize: '16rem',
     color: colors.title.primary,
-    fontWeight: 'bold',
   },
   subTitle: {
+    fontFamily: 'Poppins-SemiBold',
     fontSize: '11rem',
     color: colors.title.secondary,
-    fontWeight: 'bold',
   },
 });
